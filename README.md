@@ -8,7 +8,7 @@ Before you begin, ensure you have the following installed:
 
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (version 11 or higher)
 - [Maven](https://maven.apache.org/download.cgi) (for dependency management and build)
-- [Oracle Database](https://www.oracle.com/database/technologies/) or any other database of your choice
+- [Mysql Database] or any other database of your choice
 - An IDE (e.g., [IntelliJ IDEA](https://www.jetbrains.com/idea/), [Eclipse](https://www.eclipse.org/))
 
 ## Getting Started
