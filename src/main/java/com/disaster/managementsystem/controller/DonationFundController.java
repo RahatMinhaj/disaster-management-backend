@@ -119,4 +119,11 @@ public class DonationFundController extends AbstractController implements GetApi
         donationFundDomain.delete(id);
         return generateResponse(HttpStatus.OK, "Data deleted successfully");
     }
+
+    @Operation(summary = "get all data")
+    @GetMapping(ApiProvider.DonationFund.DAY_WISE_DONATION)
+    public ResponseEntity findAll() {
+        return generateResponse(donationFundDomain.findLast7DayWiseDonation(), HttpStatus.OK, "Data found");
+    }
+
 }

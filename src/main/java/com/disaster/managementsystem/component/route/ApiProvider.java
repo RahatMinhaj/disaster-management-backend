@@ -36,6 +36,7 @@ public abstract class ApiProvider {
     public static class DonationFund {
         public static final String ROOTPATH = BASEPATH + VERSION + SEPARATOR + "donations";
         public static final String DONATION_FUND_IDENTIFIER = IDENTIFIER;
+        public static final String DAY_WISE_DONATION = "day-wise-donations";
     }
 
     public static class Division {

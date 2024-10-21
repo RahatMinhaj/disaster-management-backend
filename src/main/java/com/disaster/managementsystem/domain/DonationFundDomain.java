@@ -2,6 +2,7 @@ package com.disaster.managementsystem.domain;
 
 import com.disaster.managementsystem.component.error.exception.DataNotFoundException;
 import com.disaster.managementsystem.domain.core.BaseDomain;
+import com.disaster.managementsystem.dto.DayWiseDonationSummaryDto;
 import com.disaster.managementsystem.dto.DonationFundDto;
 import com.disaster.managementsystem.entity.DonationFund;
 import com.disaster.managementsystem.mapper.DonationFundMapper;
@@ -16,8 +17,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -104,5 +107,17 @@ public class DonationFundDomain extends BaseDomain<DonationFund, UUID> {
 
     private List<DonationFund> lastSevenDaysDonation() {
         return donationFundRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(7));
+    }
+
+    public List<DayWiseDonationSummaryDto> findLast7DayWiseDonation() {
+        List<DonationFund> funds = donationFundRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(7));
+        Map<LocalDate, Double> dailyDonations = funds.stream()
+                .collect(Collectors.groupingBy(
+                        fund -> fund.getCreatedAt().toLocalDate(),
+                        Collectors.summingDouble(DonationFund::getDonationAmount)
+                ));
+        return dailyDonations.entrySet().stream()
+                .map(entry -> new DayWiseDonationSummaryDto(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 }

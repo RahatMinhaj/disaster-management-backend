@@ -32,6 +32,8 @@ public class SecurityConfig {
                     authorize
                             .requestMatchers(new AntPathRequestMatcher("/api/v1/crisis", HttpMethod.GET.name())).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/api/v1/crisis", HttpMethod.POST.name())).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/api/v1/donations", HttpMethod.POST.name())).permitAll()
+                            .requestMatchers(new AntPathRequestMatcher("/api/v1/day-wise-donations", HttpMethod.GET.name())).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/api/v1/divisions", HttpMethod.GET.name())).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/api/v1/divisions", HttpMethod.POST.name())).permitAll()
                             .requestMatchers(new AntPathRequestMatcher("/api/v1/job-posts/**", HttpMethod.GET.name())).permitAll()
